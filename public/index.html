@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Saraswati Medicine Agencies · Product Catalog</title>
+  <meta name="description" content="Search 6,600+ medicines across 35+ pharma companies. Saraswati Medicine Agencies, Kurukshetra — Pharmaceutical Distributors since 1980.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="Saraswati Medicine Agencies · Product Catalog">
+  <meta property="og:description" content="Search 6,600+ medicines across 35+ companies. Order on WhatsApp.">
+  <meta property="og:type" content="website">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="Saraswati Medicine Agencies home">
+        <span class="logo" aria-hidden="true">SMA</span>
+        <span class="brand-text">
+          <strong>Saraswati Medicine Agencies</strong>
+          <small>
+            <svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            Kurukshetra · Since 1980
+          </small>
+        </span>
+      </a>
+
+      <div class="search-wrap">
+        <label class="search" for="q">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" inputmode="search" enterkeyhint="search" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"
+                 placeholder="Search for medicines and companies">
+          <button type="button" class="clear" id="clearQ" aria-label="Clear search" hidden>
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </label>
+      </div>
+
+      <div class="header-actions">
+        <a class="h-action" href="tel:+919992011403" aria-label="Call us">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+          <span>Call us</span>
+        </a>
+        <button class="h-action" id="cartBtn" type="button" aria-label="My order list">
+          <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+          <span>My list</span>
+          <i class="badge" id="headBadge" hidden>0</i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Company filter strip (mobile) -->
+  <nav class="chips-wrap" id="chipsWrap" aria-label="Filter by company" hidden>
+    <div class="chips" id="chips"></div>
+  </nav>
+
+  <main id="main">
+    <!-- ============ HOME ============ -->
+    <section id="home" class="view">
+      <div class="banner">
+        <div class="banner-text">
+          <p class="banner-hi" lang="hi">दवाइयों की पूरी रेंज, एक ही जगह</p>
+          <h1>Your trusted pharma distributor since 1980</h1>
+          <p class="banner-sub">Browse <b id="statProducts">6,600+</b> products from <b id="statCompanies">35+</b> top companies. Make your list and send the order on WhatsApp.</p>
+          <div class="banner-cta">
+            <a class="btn btn-primary" id="heroWa" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" class="fill"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+              Order on WhatsApp
+            </a>
+            <a class="btn btn-outline" href="tel:+919992011403">Call 99920-11403</a>
+          </div>
+        </div>
+        <div class="banner-art" aria-hidden="true">
+          <svg viewBox="0 0 200 160">
+            <circle cx="120" cy="80" r="70" fill="#ffe1dc"/>
+            <rect x="62" y="58" width="96" height="40" rx="20" transform="rotate(-28 110 78)" fill="#fff" stroke="#ff6f61" stroke-width="4"/>
+            <path d="M110 78 L 79 94 A20 20 0 0 1 71 64 L 102 47 Z" transform="rotate(0)" fill="#ff6f61" opacity=".9"/>
+            <rect x="130" y="92" width="44" height="54" rx="8" fill="#fff" stroke="#24aeb1" stroke-width="4"/>
+            <rect x="136" y="82" width="32" height="14" rx="4" fill="#24aeb1"/>
+            <path d="M152 108v22M141 119h22" stroke="#24aeb1" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="52" cy="126" r="14" fill="#fff" stroke="#f5a623" stroke-width="4"/>
+            <path d="M42 126h20" stroke="#f5a623" stroke-width="4"/>
+          </svg>
+        </div>
+      </div>
+
+      <ul class="usp" aria-label="Why order from us">
+        <li><span class="usp-ico">
+          <svg viewBox="0 0 24 24"><path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7z"/><path d="m7 10 7 7"/></svg></span>
+          <div><b id="uspProducts">6,600+</b><small>Products</small></div></li>
+        <li><span class="usp-ico">
+          <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span>
+          <div><b id="uspCompanies">36</b><small>Companies</small></div></li>
+        <li><span class="usp-ico">
+          <svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.3 8 9 4.6-.7 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <div><b>Authorised</b><small>Distributor</small></div></li>
+        <li><span class="usp-ico">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <div><b>Since 1980</b><small>Trusted service</small></div></li>
+      </ul>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Shop by company</h2>
+          <div class="tabs" role="tablist" id="catTabs">
+            <button role="tab" data-cat="" aria-selected="true">All</button>
+            <button role="tab" data-cat="Pharma" aria-selected="false">Pharma</button>
+            <button role="tab" data-cat="OTC" aria-selected="false">OTC</button>
+            <button role="tab" data-cat="Vaccines" aria-selected="false">Vaccines</button>
+          </div>
+        </div>
+        <div class="company-grid" id="companyGrid"></div>
+      </div>
+
+      <footer class="foot">
+        <div>
+          <span class="logo small" aria-hidden="true">SMA</span>
+          <p><b>Saraswati Medicine Agencies</b><br>Opp. Gita High School, Railway Road,<br>Kurukshetra, Haryana</p>
+        </div>
+        <div>
+          <p class="foot-title">Contact</p>
+          <p><a href="tel:+919992011403">99920-11403</a><br><a href="tel:+919812126603">98121-26603</a></p>
+        </div>
+        <p class="foot-note">Product availability is subject to stock. Please confirm with us before ordering.</p>
+      </footer>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section id="results" class="view" hidden>
+      <div class="results-layout">
+        <aside class="filters" aria-label="Filter by company">
+          <div class="filters-head">
+            <h3>Filters</h3>
+            <button type="button" class="link" id="clearFilter" hidden>Clear</button>
+          </div>
+          <p class="filters-label">Company</p>
+          <div class="filter-search">
+            <input id="coSearch" type="search" placeholder="Search company" autocomplete="off">
+          </div>
+          <ul class="filter-list" id="filterList"></ul>
+        </aside>
+
+        <div class="results-main">
+          <div class="results-head">
+            <div>
+              <h2 id="resultsTitle">All products</h2>
+              <p id="resultsCount"></p>
+            </div>
+            <button class="btn btn-small btn-ghost" id="shareBtn" type="button">
+              <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+              Share
+            </button>
+          </div>
+          <ul class="plist" id="list" role="list"></ul>
+          <div id="sentinel" class="sentinel" aria-hidden="true"></div>
+          <div class="empty" id="empty" hidden>
+            <div class="empty-art" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8.5 11h5"/></svg>
+            </div>
+            <h3>No matching products</h3>
+            <p>Check the spelling or try fewer letters. Can't find it? Ask us. We may still have it in stock.</p>
+            <a class="btn btn-primary" id="askWa" href="#" target="_blank" rel="noopener">Ask on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ ORDER LIST SHEET ============ -->
+  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+  <aside class="sheet" id="sheet" aria-label="Order list" aria-hidden="true">
+    <div class="sheet-grip" aria-hidden="true"></div>
+    <div class="sheet-head">
+      <div>
+        <h2>My order list</h2>
+        <p id="sheetCount">0 items</p>
+      </div>
+      <button class="close-btn" id="closeSheet" aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="sheet-body">
+      <ul class="cart" id="cart"></ul>
+      <div class="empty small" id="cartEmpty">
+        <div class="empty-art" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+        </div>
+        <h3>Your list is empty</h3>
+        <p>Tap <b>ADD</b> on any product to add it here.</p>
+      </div>
+    </div>
+    <div class="sheet-foot" id="sheetFoot">
+      <input class="party" id="party" type="text" placeholder="Shop / firm name (optional)" autocomplete="organization">
+      <div class="row">
+        <button class="btn btn-ghost" id="clearCart" type="button">Clear all</button>
+        <a class="btn btn-wa grow" id="sendWa" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" class="fill"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+          Send order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sticky "view list" bar (mobile, appears when list has items) -->
+  <button class="cart-bar" id="cartBar" type="button" hidden>
+    <span><b id="cartBarCount">0 items</b><small>added to your list</small></span>
+    <span class="cart-bar-cta">View list
+      <svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>
+    </span>
+  </button>
+
+  <!-- Bottom nav (mobile) -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <button data-nav="home" class="active">
+      <svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+      <span>Home</span>
+    </button>
+    <button data-nav="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span>Search</span>
+    </button>
+    <button data-nav="cart">
+      <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+      <span>My list</span>
+      <i class="badge" id="cartBadge" hidden>0</i>
+    </button>
+    <a href="tel:+919992011403">
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+      <span>Call</span>
+    </a>
+  </nav>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button class="to-top" id="toTop" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></svg>
+  </button>
+
+  <script src="assets/products.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+services:
+  catalog:
+    build: .
+    image: sma-catalog
+    container_name: sma-catalog
+    ports:
+      - "8080:80"
+    restart: unless-stopped
