@@ -406,3 +406,14 @@ body.has-cart-bar .to-top { bottom: calc(var(--nav-h) + var(--safe-b) + 76px); }
   .toast { bottom: 24px; } body.has-cart-bar .toast { bottom: 92px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ================= Mobile tap behaviour =================
+   - touch-action: manipulation turns off double-tap-to-zoom (so tapping + / ADD quickly never zooms)
+     while keeping scrolling and pinch-to-zoom for people who need bigger text.
+   - iOS zooms into any text box whose text is smaller than 16px, so all inputs use 16px.
+   - Buttons don't select text or flash a highlight when tapped repeatedly. */
+*, *::before, *::after { touch-action: manipulation; }
+.search input, .stepper input, .party, .filter-search input { font-size: 16px; }
+button, .add, .stepper, .chip, .co, .thumb, .bottom-nav > *, .cart-bar {
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}

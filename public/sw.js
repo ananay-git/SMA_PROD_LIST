@@ -2,7 +2,7 @@
 // - Pages: network first, so a new deploy shows immediately; the cached copy is used only when offline.
 // - Versioned files (app.js?v=…, style.css?v=…, products.js?v=…): cache first, since a new version gets a new URL.
 // - Everything else (logos, icons, fonts): cached copy instantly, refreshed in the background.
-const CACHE = 'sma-catalog-4bd9af0c70';
+const CACHE = 'sma-catalog-1a9a165131';
 const CORE = ['./', 'assets/logo.svg', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {
