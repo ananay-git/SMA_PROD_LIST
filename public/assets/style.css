@@ -81,11 +81,13 @@ button { font: inherit; color: inherit; }
 .h-action .badge { position: absolute; top: 2px; left: 24px; }
 @media (hover: hover) { .h-action:hover { background: var(--surface-2); } }
 
-/* mobile: brand row collapses while scrolling down */
+/* mobile: brand row slides out of view while scrolling down.
+   Only transform changes (never layout height), so the page doesn't jump under the finger. */
 @media (max-width: 899px) {
-  .header-inner { transition: padding .2s; }
-  .header.compact .brand, .header.compact .header-actions { display: none; }
-  .header.compact .header-inner { grid-template-areas: "search search"; padding-top: 8px; padding-bottom: 8px; }
+  .header, .chips-wrap { transition: transform .22s ease; will-change: transform; }
+  body.hdr-compact .header, body.hdr-compact .chips-wrap { transform: translateY(calc(-1 * var(--hide-h, 0px))); }
+  body.hdr-compact .brand, body.hdr-compact .header-actions { opacity: 0; pointer-events: none; }
+  .brand, .header-actions { transition: opacity .15s; }
 }
 @media (min-width: 900px) {
   .header-inner { grid-template-columns: auto 1fr auto; grid-template-areas: "brand search actions"; gap: 24px; padding: 12px 24px; }

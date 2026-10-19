@@ -452,7 +452,7 @@
     if (b.dataset.nav === 'home') goHome();
     else if (b.dataset.nav === 'search') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      header.classList.remove('compact');
+      setCompact(false);
       input.focus();
     } else openSheet();
   });
@@ -460,24 +460,42 @@
   $('cartBar').addEventListener('click', openSheet);
 
   // header height for sticky offsets + compact-on-scroll (mobile)
-  var header = $('header'), lastY = 0, ticking = false, toTop = $('toTop');
-  function syncHeaderH() { document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px'); }
+  var header = $('header'), ticking = false, toTop = $('toTop');
+  var lastY = window.scrollY, anchorY = lastY, dir = 0, isCompact = false;
+  function syncHeaderH() {
+    var root = document.documentElement.style;
+    root.setProperty('--header-h', header.offsetHeight + 'px');
+    // how far to slide: everything above the search box, keeping a small margin
+    var hide = header.querySelector('.search-wrap').offsetTop - 6;
+    root.setProperty('--hide-h', Math.max(0, hide) + 'px');
+  }
+  function setCompact(on) {
+    if (on === isCompact) return;
+    isCompact = on;
+    document.body.classList.toggle('hdr-compact', on);
+  }
   if (window.ResizeObserver) new ResizeObserver(syncHeaderH).observe(header);
   syncHeaderH();
+  window.addEventListener('resize', function () { if (window.innerWidth >= 900) setCompact(false); });
   window.addEventListener('scroll', function () {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(function () {
-      var y = window.scrollY;
+      var y = Math.max(0, window.scrollY);
       header.classList.toggle('scrolled', y > 4);
       if (window.innerWidth < 900 && document.activeElement !== input) {
-        if (y > lastY + 6 && y > 140) header.classList.add('compact');
-        else if (y < lastY - 6 || y < 60) header.classList.remove('compact');
+        // only react after a deliberate 24px move in one direction (ignores momentum jitter and bounce)
+        var d = y > lastY ? 1 : y < lastY ? -1 : 0;
+        if (d && d !== dir) { dir = d; anchorY = lastY; }
+        if (y < 60) setCompact(false);
+        else if (dir > 0 && y - anchorY > 24 && y > 140) setCompact(true);
+        else if (dir < 0 && anchorY - y > 24) setCompact(false);
       }
       toTop.hidden = y < 900;
       lastY = y; ticking = false;
     });
   }, { passive: true });
+  input.addEventListener('focus', function () { setCompact(false); });
   toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
   // ---------- Share ----------
