@@ -1,6 +1,6 @@
 // Offline cache: serve cached copy instantly, refresh it in the background.
-const CACHE = 'sma-catalog-187c3b14a3';
-const CORE = ['./', 'index.html', 'assets/style.css', 'assets/app.js', 'assets/products.js', 'assets/icon.svg', 'manifest.webmanifest'];
+const CACHE = 'sma-catalog-ae060140e9';
+const CORE = ['./', 'index.html', 'assets/style.css', 'assets/app.js', 'assets/products.js', 'assets/icon.svg', 'assets/logo.svg', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));

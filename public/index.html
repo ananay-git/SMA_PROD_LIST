@@ -10,7 +10,8 @@
   <meta property="og:description" content="Search 6,600+ medicines across 35+ companies. Order on WhatsApp.">
   <meta property="og:type" content="website">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/logo.svg" as="image" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +22,7 @@
   <header class="header" id="header">
     <div class="header-inner">
       <a class="brand" href="./" aria-label="Saraswati Medicine Agencies home">
-        <span class="logo" aria-hidden="true">SMA</span>
+        <img class="logo" src="assets/logo.svg" alt="" width="40" height="40">
         <span class="brand-text">
           <strong>Saraswati Medicine Agencies</strong>
           <small>
@@ -80,8 +81,10 @@
         <div class="banner-art" aria-hidden="true">
           <svg viewBox="0 0 200 160">
             <circle cx="120" cy="80" r="70" fill="#ffe1dc"/>
-            <rect x="62" y="58" width="96" height="40" rx="20" transform="rotate(-28 110 78)" fill="#fff" stroke="#ff6f61" stroke-width="4"/>
-            <path d="M110 78 L 79 94 A20 20 0 0 1 71 64 L 102 47 Z" transform="rotate(0)" fill="#ff6f61" opacity=".9"/>
+            <g transform="rotate(-30 105 78)">
+              <rect x="57" y="58" width="96" height="40" rx="20" fill="#fff" stroke="#ff6f61" stroke-width="4"/>
+              <path d="M105 60H77a18 18 0 0 0 0 36h28z" fill="#ff6f61"/>
+            </g>
             <rect x="130" y="92" width="44" height="54" rx="8" fill="#fff" stroke="#24aeb1" stroke-width="4"/>
             <rect x="136" y="82" width="32" height="14" rx="4" fill="#24aeb1"/>
             <path d="M152 108v22M141 119h22" stroke="#24aeb1" stroke-width="5" stroke-linecap="round"/>
@@ -121,7 +124,7 @@
 
       <footer class="foot">
         <div>
-          <span class="logo small" aria-hidden="true">SMA</span>
+          <img class="logo small" src="assets/logo.svg" alt="" width="40" height="40" loading="lazy">
           <p><b>Saraswati Medicine Agencies</b><br>Opp. Gita High School, Railway Road,<br>Kurukshetra, Haryana</p>
         </div>
         <div>
@@ -149,7 +152,8 @@
 
         <div class="results-main">
           <div class="results-head">
-            <div>
+            <span id="resultsLogo"></span>
+            <div class="results-title">
               <h2 id="resultsTitle">All products</h2>
               <p id="resultsCount"></p>
             </div>
@@ -236,6 +240,17 @@
       <span>Call</span>
     </a>
   </nav>
+
+  <!-- Product photo viewer -->
+  <div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Product photo" hidden>
+    <figure class="zoom-card">
+      <button class="close-btn zoom-close" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <div class="zoom-art" id="zoomArt"></div>
+      <figcaption><b id="zoomName"></b><span id="zoomCo"></span><small id="zoomNote"></small></figcaption>
+    </figure>
+  </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <button class="to-top" id="toTop" aria-label="Back to top" hidden>
