@@ -8,10 +8,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=3600, must-revalidate"
+# No long cache on /assets/*: Netlify's default (re-check on every visit, served from its CDN)
+# plus the ?v= version stamps that tools/build-data.js adds mean new deploys show immediately.
 
 [[headers]]
   for = "/sw.js"

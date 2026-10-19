@@ -1,6 +1,9 @@
-// Offline cache: serve cached copy instantly, refresh it in the background.
-const CACHE = 'sma-catalog-e7abcb8776';
-const CORE = ['./', 'index.html', 'assets/style.css', 'assets/app.js', 'assets/products.js', 'assets/icon.svg', 'assets/logo.svg', 'manifest.webmanifest'];
+// Offline support.
+// - Pages: network first, so a new deploy shows immediately; the cached copy is used only when offline.
+// - Versioned files (app.js?v=…, style.css?v=…, products.js?v=…): cache first, since a new version gets a new URL.
+// - Everything else (logos, icons, fonts): cached copy instantly, refreshed in the background.
+const CACHE = 'sma-catalog-4bd9af0c70';
+const CORE = ['./', 'assets/logo.svg', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
@@ -21,15 +24,23 @@ self.addEventListener('fetch', (e) => {
   const isFont = url.hostname.endsWith('fonts.googleapis.com') || url.hostname.endsWith('fonts.gstatic.com');
   if (!sameOrigin && !isFont) return;
 
-  const key = sameOrigin && req.mode === 'navigate' ? 'index.html' : req;
-  e.respondWith(
-    caches.open(CACHE).then(async (cache) => {
-      const cached = await cache.match(key, { ignoreSearch: req.mode === 'navigate' });
-      const network = fetch(req).then((res) => {
-        if (res.ok) cache.put(key, res.clone());
+  if (req.mode === 'navigate') {
+    e.respondWith(
+      fetch(req).then((res) => {
+        if (res.ok) caches.open(CACHE).then((c) => c.put('./', res.clone()));
         return res;
-      }).catch(() => cached);
-      return cached || network;
-    })
-  );
+      }).catch(() => caches.match('./'))
+    );
+    return;
+  }
+
+  e.respondWith(caches.open(CACHE).then(async (cache) => {
+    const cached = await cache.match(req);
+    if (cached && url.searchParams.has('v')) return cached;
+    const network = fetch(req).then((res) => {
+      if (res.ok) cache.put(req, res.clone());
+      return res;
+    }).catch(() => cached);
+    return cached || network;
+  }));
 });
