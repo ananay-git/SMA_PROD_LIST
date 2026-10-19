@@ -189,6 +189,96 @@
       out.push({ p: p, s: s });
     }
     out.sort(function (a, b) { return a.s - b.s || (a.p.name < b.p.name ? -1 : a.p.name > b.p.name ? 1 : 0); });
+    var exact = out.map(function (x) { return x.p; });
+    fuzzySet = {};
+    if (exact.length < FUZZY_WHEN_FEWER_THAN) {
+      var close = fuzzySearch(tokens, exact);
+      close.forEach(function (p) { fuzzySet[p.i] = true; });
+      exact = exact.concat(close);
+    }
+    return exact;
+  }
+
+  // ---------- Typo-tolerant search ----------
+  // Runs only when the exact search finds few results. A query word may differ from a product
+  // (or company) word by 1 letter (5-7 letter words) or 2 letters (8+): missing, extra, wrong or
+  // swapped letters. Words with digits (strengths like 50 / 500) must still match exactly.
+  var FUZZY_WHEN_FEWER_THAN = 10, fuzzySet = {};
+  companies.forEach(function (c) { c.words = c.name.toUpperCase().split(/[^A-Z0-9]+/).filter(function (w) { return w.length > 2; }); });
+
+  function maxEdits(token) {
+    if (/\d/.test(token) || token.length < 5) return 0;
+    return token.length >= 8 ? 2 : 1;
+  }
+
+  // Smallest edit distance between `a` and any prefix of `b` around a's length
+  // (so a partly typed word still matches). Counts swapped neighbours as one edit.
+  var row0 = [], row1 = [], row2 = [];
+  function prefixDistance(a, b, max) {
+    var n = a.length, m = Math.min(b.length, n + max);
+    if (m < n - max) return max + 1;
+    var j, i, pp = row0, prev = row1, cur = row2, tmp;
+    for (j = 0; j <= m; j++) prev[j] = j;
+    for (i = 1; i <= n; i++) {
+      cur[0] = i;
+      var rowMin = i;
+      for (j = 1; j <= m; j++) {
+        var cost = a.charCodeAt(i - 1) === b.charCodeAt(j - 1) ? 0 : 1;
+        var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+        if (i > 1 && j > 1 && a.charCodeAt(i - 1) === b.charCodeAt(j - 2) && a.charCodeAt(i - 2) === b.charCodeAt(j - 1)) v = Math.min(v, pp[j - 2] + 1);
+        cur[j] = v;
+        if (v < rowMin) rowMin = v;
+      }
+      if (rowMin > max) return max + 1;
+      tmp = pp; pp = prev; prev = cur; cur = tmp;
+    }
+    var best = max + 1;
+    for (j = Math.max(0, n - max); j <= m; j++) if (prev[j] < best) best = prev[j];
+    return best;
+  }
+
+  // Best match of `token` among `words`. Typos almost never change the first letter, so that must
+  // match. Ties are broken by how many leading letters agree (DIGNE -> DIGENE before DIANE).
+  var lastShared = 0;
+  function wordDistance(token, words, max) {
+    var best = max + 1, shared = 0;
+    for (var w = 0; w < words.length; w++) {
+      var word = words[w];
+      if (word.length < 3 || word.charCodeAt(0) !== token.charCodeAt(0)) continue;
+      var d = prefixDistance(token, word, max);
+      if (d > max) continue;
+      var k = 0;
+      while (k < token.length && k < word.length && token.charCodeAt(k) === word.charCodeAt(k)) k++;
+      if (d < best || (d === best && k > shared)) { best = d; shared = k; }
+    }
+    lastShared = shared;
+    return best;
+  }
+
+  function fuzzySearch(tokens, already) {
+    var limits = tokens.map(maxEdits);
+    if (!limits.some(Boolean)) return [];
+    var skip = {};
+    already.forEach(function (p) { skip[p.i] = true; });
+    var out = [];
+    for (var i = 0; i < products.length; i++) {
+      var p = products[i];
+      if (skip[p.i]) continue;
+      var c = companies[p.co], total = 0, shared = 0, ok = true;
+      for (var t = 0; t < tokens.length; t++) {
+        var tok = tokens[t];
+        if (p.key.indexOf(tok) !== -1 || c.key.indexOf(tok) !== -1) continue;
+        if (!limits[t]) { ok = false; break; }
+        var dn = wordDistance(tok, p.words, limits[t]), sn = lastShared;
+        var dc = wordDistance(tok, c.words, limits[t]), sc = lastShared;
+        var d = Math.min(dn, dc);
+        if (d > limits[t]) { ok = false; break; }
+        total += d;
+        shared += dn <= dc ? sn : sc;
+      }
+      if (ok && total > 0) out.push({ p: p, d: total, s: shared });
+    }
+    out.sort(function (a, b) { return a.d - b.d || b.s - a.s || (a.p.name < b.p.name ? -1 : a.p.name > b.p.name ? 1 : 0); });
     return out.map(function (x) { return x.p; });
   }
 
@@ -202,7 +292,7 @@
 
   // ---------- State & URL ----------
   var state = { q: '', co: null, cat: '' };
-  var base = [], results = [], shown = 0, coCounts = {};
+  var base = [], results = [], shown = 0, coCounts = {}, exactCount = 0;
   var input = $('q'), clearQ = $('clearQ'), list = $('list'), sentinel = $('sentinel');
   var isResults = function () { return !!(state.q || state.co != null); };
 
@@ -338,7 +428,13 @@
   function renderMore() {
     if (shown >= results.length) return;
     var end = Math.min(shown + PAGE, results.length), html = '';
-    for (var i = shown; i < end; i++) html += itemHtml(results[i]);
+    for (var i = shown; i < end; i++) {
+      if (i === exactCount) {
+        html += '<li class="close-head" role="presentation"><b>' + (exactCount ? 'Close matches' : 'Did you mean?') + '</b>' +
+          '<span>Similar spellings to “' + esc(state.q) + '”</span></li>';
+      }
+      html += itemHtml(results[i]);
+    }
     list.insertAdjacentHTML('beforeend', html);
     shown = end;
   }
@@ -359,6 +455,7 @@
     base.forEach(function (p) { coCounts[p.co] = (coCounts[p.co] || 0) + 1; });
     results = state.co == null ? base : base.filter(function (p) { return p.co === state.co; });
     if (!state.q) results.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+    exactCount = results.filter(function (p) { return !fuzzySet[p.i]; }).length;
     shown = 0;
     list.innerHTML = '';
     renderMore();
@@ -371,8 +468,12 @@
     $('resultsTitle').textContent = title;
     $('resultsLogo').innerHTML = state.co != null ? logoHtml(companies[state.co], 'head-logo') : '';
     var nCos = Object.keys(coCounts).length;
-    $('resultsCount').textContent = 'Showing ' + plural(results.length, 'product', 'products') +
-      (state.co == null && state.q ? ' from ' + plural(nCos, 'company', 'companies') : '');
+    if (state.q && exactCount === 0 && results.length) {
+      $('resultsCount').textContent = 'No exact match · ' + plural(results.length, 'close match', 'close matches');
+    } else {
+      $('resultsCount').textContent = 'Showing ' + plural(results.length, 'product', 'products') +
+        (state.co == null && state.q ? ' from ' + plural(nCos, 'company', 'companies') : '');
+    }
     $('empty').hidden = results.length > 0;
     $('askWa').href = waLink('Hello, do you have "' + state.q + '" available?');
   }

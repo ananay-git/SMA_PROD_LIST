@@ -1,37 +1,39 @@
 ﻿company,category,logo
+Abbott (Consumer),OTC,assets/logos/abbott-india.svg
 Abbott India,Pharma,assets/logos/abbott-india.svg
-Novo Nordisk,Pharma,assets/logos/novo-nordisk.png
-Dr. Reddy's Labs,Pharma,assets/logos/dr-reddy-s-labs.svg
-Glenmark Pharma,Pharma,assets/logos/glenmark-pharma.png
-Sun Pharma (Ranbaxy),Pharma,assets/logos/sun-pharma.svg
-Sun Pharma,Pharma,assets/logos/sun-pharma.svg
-Torrent Pharma,Pharma,assets/logos/torrent-pharma.png
-Serdia,Pharma,
-Zydus Healthcare,Pharma,assets/logos/zydus-healthcare.png
+B.E. Ltd,Vaccines,assets/logos/b-e-ltd.png
 Bayer Zydus,Pharma,assets/logos/bayer-zydus.svg
-B.E. Ltd,Pharma,assets/logos/b-e-ltd.png
-J.B. Chemicals,Pharma,assets/logos/j-b-chemicals.png
-MSD,Pharma,assets/logos/msd.svg
-Mankind Pharma,Pharma,assets/logos/mankind-pharma.png
-Novartis,Pharma,assets/logos/novartis.svg
+Bharat Serums,Vaccines,
+Boehringer Ingelheim,Pharma,assets/logos/boehringer-ingelheim.svg
+Cadila Pharmaceuticals,Pharma,assets/logos/cadila-pharmaceuticals.png
+Danone,OTC,assets/logos/danone.png
+Dr. Reddy's Labs,Pharma,assets/logos/dr-reddy-s-labs.svg
 Eris Oaknet,Pharma,assets/logos/eris-oaknet.png
-Uni-Sankyo,Pharma,
+Fourrts India,Pharma,assets/logos/fourrts-india.png
 Franco Indian Pharma,Pharma,assets/logos/franco-indian-pharma.png
 Galderma,Pharma,assets/logos/galderma.svg
-Procter & Gamble (Merck),Pharma,assets/logos/procter-and-gamble-merck.svg
-Psychotropics India,Pharma,
-PIL Pharma (Generic),Pharma,
-Wockhardt,Pharma,assets/logos/wockhardt.png
-Nouveau Medicament,Pharma,assets/logos/nouveau-medicament.png
-Abbott (Consumer),OTC,assets/logos/abbott-india.svg
-Danone,OTC,assets/logos/danone.png
-Nutrimed (Momylac),OTC,
-GSK,OTC,assets/logos/gsk.png
-Mabrey Healthcare,Pharma,
-Johnson & Johnson,OTC,assets/logos/johnson-and-johnson.svg
-Fixderma,OTC,assets/logos/fixderma.svg
-Reckitt Benckiser,OTC,assets/logos/reckitt-benckiser.png
-Dabur India,OTC,assets/logos/dabur-india.png
 Ghrelin Pharma,Pharma,assets/logos/ghrelin-pharma.png
+Glenmark Pharma,Pharma,assets/logos/glenmark-pharma.png
+GSK,OTC,assets/logos/gsk.png
+Hindustan Syringes (HMD),Surgical,assets/logos/hindustan-syringes-hmd.png
+J.B. Chemicals,Pharma,assets/logos/j-b-chemicals.png
+Johnson & Johnson,OTC,assets/logos/johnson-and-johnson.svg
+LuvLap,OTC,assets/logos/luvlap.png
+Mabrey Healthcare,Pharma,
+Mankind Pharma,Pharma,assets/logos/mankind-pharma.png
+MSD,Pharma,assets/logos/msd.svg
+Nouveau Medicament,Pharma,assets/logos/nouveau-medicament.png
+Novartis,Pharma,assets/logos/novartis.svg
+Novo Nordisk,Pharma,assets/logos/novo-nordisk.png
+Nutrimed (Momylac),OTC,
+PIL Pharma (Generic),Pharma,
+Procter & Gamble (Merck),Pharma,assets/logos/procter-and-gamble-merck.svg
+Reckitt Benckiser,OTC,assets/logos/reckitt-benckiser.png
+Serdia,Pharma,
+Sun Pharma,Pharma,assets/logos/sun-pharma.svg
+Torrent Pharma,Pharma,assets/logos/torrent-pharma.png
+Unicharm India,OTC,assets/logos/unicharm-india.svg
 Vaccines & Human Biologicals,Vaccines,
+Wockhardt,Pharma,assets/logos/wockhardt.png
+Zydus Healthcare,Pharma,assets/logos/zydus-healthcare.png
 Zydus Wellness,OTC,assets/logos/zydus-wellness.png
